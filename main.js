@@ -1,6 +1,13 @@
 (() => {
-  const PRINT_5X8 = 48;
-  const PRINT_8X10 = 72;
+  // Baseline: 5×8 framed = $150. Everything scales from that.
+  const PRINT_5X8 = 40;
+  const PRINT_8X10 = 65;
+
+  const PRICE = {
+    "5×8": { original: 120, framed: 150 },
+    "8×10": { original: 230, framed: 295 },
+    "16×24": { original: 480, framed: 620 },
+  };
 
   const catalog = [
     {
@@ -9,8 +16,6 @@
       title: "Window light",
       medium: "Oil pastel",
       size: "5×8",
-      original: 240,
-      framed: 320,
       blurb: "Looking out — black, yellow, and window blue.",
     },
     {
@@ -19,8 +24,6 @@
       title: "Pink and blue light",
       medium: "Acrylic",
       size: "8×10",
-      original: 340,
-      framed: 430,
       blurb: "Profile in magenta and ice blue. One of one.",
     },
     {
@@ -29,8 +32,6 @@
       title: "Colorée",
       medium: "Acrylic",
       size: "16×24",
-      original: 520,
-      framed: 680,
       blurb: "Fan, blush, and blue lid — a theatrical study in color.",
     },
     {
@@ -39,8 +40,6 @@
       title: "Skintones",
       medium: "Oil pastel",
       size: "8×10",
-      original: 280,
-      framed: 370,
       blurb: "A laughing study in light and city night.",
     },
     {
@@ -49,8 +48,6 @@
       title: "Pastel colors",
       medium: "Oil pastel",
       size: "8×10",
-      original: 300,
-      framed: 390,
       blurb: "Yellow, pink, and blue across a closed gaze.",
     },
     {
@@ -59,8 +56,6 @@
       title: "Magenta light",
       medium: "Oil pastel",
       size: "5×8",
-      original: 230,
-      framed: 310,
       blurb: "Hot magenta against cool blue shadow.",
     },
     {
@@ -69,8 +64,6 @@
       title: "Headwrap",
       medium: "Oil pastel",
       size: "8×10",
-      original: 320,
-      framed: 410,
       blurb: "Oil pastel with architectural backdrop.",
     },
     {
@@ -79,9 +72,31 @@
       title: "Outside light",
       medium: "Oil pastel",
       size: "8×10",
-      original: 320,
-      framed: 410,
       blurb: "Outdoor light on skin.",
+    },
+    {
+      id: "beard-cap",
+      file: "piece-beard-cap.jpg",
+      title: "Cap & beard",
+      medium: "Oil pastel",
+      size: "5×8",
+      blurb: "Blue eyes, white cap, sky behind.",
+    },
+    {
+      id: "orbs",
+      file: "piece-orbs.jpg",
+      title: "Orbs",
+      medium: "Oil pastel",
+      size: "5×8",
+      blurb: "Warm face, floating color orbs on black.",
+    },
+    {
+      id: "silver-beard",
+      file: "piece-silver-beard.jpg",
+      title: "Silver",
+      medium: "Oil pastel",
+      size: "5×8",
+      blurb: "Profile emerging from black — silver light.",
     },
     {
       id: "blue-yellow",
@@ -89,8 +104,6 @@
       title: "Blue & yellow",
       medium: "Acrylic",
       size: "5×8",
-      original: 260,
-      framed: 340,
       blurb: "Hard split of cool blue and warm yellow.",
     },
     {
@@ -99,8 +112,6 @@
       title: "Cosmic gaze",
       medium: "Oil pastel",
       size: "5×8",
-      original: 260,
-      framed: 340,
       blurb: "Profile in fire-orange and deep blue.",
     },
     {
@@ -109,8 +120,6 @@
       title: "A few steps",
       medium: "Oil pastel",
       size: "5×8",
-      original: 220,
-      framed: 300,
       blurb: "Process portrait — a few steps into the face.",
     },
     {
@@ -119,11 +128,13 @@
       title: "Foreground light",
       medium: "Oil pastel",
       size: "8×10",
-      original: 280,
-      framed: 370,
       blurb: "Light held in the front plane of the portrait.",
     },
-  ];
+  ].map((item) => ({
+    ...item,
+    original: PRICE[item.size].original,
+    framed: PRICE[item.size].framed,
+  }));
 
   const grid = document.getElementById("grid");
   const sheet = document.getElementById("sheet");
@@ -190,9 +201,9 @@
           <div class="card__meta">
             <div class="card__row">
               <span class="card__title">${item.title}</span>
-              <span class="card__price">${money(item.original)}</span>
+              <span class="card__price">${money(item.framed)}</span>
             </div>
-            <span class="card__size">${item.size} · Original</span>
+            <span class="card__size">${item.size} · from ${money(item.original)}</span>
             <span class="card__avail">Available · Buy</span>
           </div>
         </button>
@@ -223,12 +234,12 @@
 
   function renderOffers(item) {
     const offers = offersFor(item);
-    selectedOffer = offers[0];
+    selectedOffer = offers[1]; // default framed
     priceList.innerHTML = offers
       .map(
-        (o, i) => `
-      <label class="offer ${i === 0 ? "is-selected" : ""}">
-        <input type="radio" name="offer" value="${o.id}" ${i === 0 ? "checked" : ""} />
+        (o) => `
+      <label class="offer ${o.id === "framed" ? "is-selected" : ""}">
+        <input type="radio" name="offer" value="${o.id}" ${o.id === "framed" ? "checked" : ""} />
         <span class="offer__text">
           <span class="offer__label">${o.label}</span>
           <span class="offer__detail">${o.detail}</span>
