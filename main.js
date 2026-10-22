@@ -4,7 +4,7 @@
   const PRINT_8X10 = 65;
 
   const PRICE = {
-    "5×8": { original: 120, framed: 150 },
+    "5×8": { original: 120, framed: 180 },
     "8×10": { original: 230, framed: 295 },
     "16×24": { original: 480, framed: 620 },
   };
