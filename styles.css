@@ -371,7 +371,7 @@ a {
   border-bottom: 1px solid rgba(196, 91, 138, 0.45);
 }
 
-/* Fullscreen product sheet */
+/* Fullscreen product sheet — art edge-to-edge, copy on bottom overlay */
 .sheet {
   border: 0;
   padding: 0;
@@ -379,8 +379,10 @@ a {
   width: 100vw;
   max-width: 100vw;
   height: 100%;
+  height: 100dvh;
   max-height: 100%;
-  background: var(--void);
+  max-height: 100dvh;
+  background: #050504;
   color: var(--bone);
   overflow: hidden;
 }
@@ -394,13 +396,11 @@ a {
 }
 
 .sheet__layout {
-  display: flex;
-  flex-direction: column;
+  position: relative;
   width: 100%;
   height: 100%;
   max-height: 100dvh;
   overflow: hidden;
-  position: relative;
 }
 
 .sheet__close {
@@ -411,37 +411,57 @@ a {
   height: 2.2rem;
   padding: 0 0.85rem;
   border: 1px solid rgba(244, 240, 234, 0.28);
-  background: rgba(9, 9, 8, 0.72);
+  background: rgba(9, 9, 8, 0.55);
   color: var(--bone);
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   cursor: pointer;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .sheet__media {
+  position: absolute;
+  inset: 0;
   margin: 0;
-  flex: 0 0 auto;
-  height: min(42svh, 22rem);
+  padding: 0;
   background: #050504;
-  display: grid;
-  place-items: center;
-  padding: calc(2.6rem + env(safe-area-inset-top, 0px)) 0.75rem 0.5rem;
+  z-index: 0;
 }
 
 .sheet__media img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
 .sheet__body {
-  flex: 1 1 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  max-height: min(78dvh, 100%);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 1rem var(--pad-r) calc(1.4rem + env(safe-area-inset-bottom, 0px)) var(--pad);
+  padding:
+    5.5rem var(--pad-r)
+    calc(1.25rem + env(safe-area-inset-bottom, 0px))
+    var(--pad);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 4, 0) 0%,
+      rgba(5, 5, 4, 0.45) 28%,
+      rgba(5, 5, 4, 0.82) 55%,
+      rgba(5, 5, 4, 0.94) 100%
+    );
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
 }
 
 .sheet__status {
@@ -498,7 +518,8 @@ a {
   align-items: center;
   gap: 0.7rem;
   padding: 0.75rem 0.8rem;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(244, 240, 234, 0.22);
+  background: rgba(9, 9, 8, 0.35);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -534,8 +555,8 @@ a {
 }
 
 .offer.is-selected {
-  border-color: rgba(232, 160, 191, 0.55);
-  background: rgba(196, 91, 138, 0.08);
+  border-color: rgba(232, 160, 191, 0.65);
+  background: rgba(196, 91, 138, 0.18);
 }
 
 .sheet__print-note {
@@ -579,8 +600,8 @@ a {
 
 .ghost-btn {
   appearance: none;
-  border: 1px solid var(--line);
-  background: transparent;
+  border: 1px solid rgba(244, 240, 234, 0.28);
+  background: rgba(9, 9, 8, 0.28);
   color: var(--bone);
   min-height: 2.7rem;
   font-family: var(--font-body);
@@ -593,7 +614,7 @@ a {
 .sheet__more {
   margin-top: 1rem;
   padding-top: 0.9rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(244, 240, 234, 0.18);
   color: var(--fog);
   font-size: 0.84rem;
 }
@@ -627,9 +648,6 @@ a {
     font-size: clamp(2.8rem, 11vw, 6.4rem);
   }
 
-  .sheet__media {
-    height: min(46svh, 26rem);
-  }
 }
 
 @media (min-width: 760px) {
@@ -651,10 +669,10 @@ a {
   }
 
   .sheet {
-    width: min(100vw, 56rem);
-    max-width: min(96vw, 56rem);
-    height: min(100dvh, 44rem);
-    max-height: min(94dvh, 44rem);
+    width: min(100vw, 42rem);
+    max-width: min(96vw, 42rem);
+    height: min(100dvh, 52rem);
+    max-height: min(94dvh, 52rem);
     margin: auto;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
   }
@@ -664,20 +682,12 @@ a {
     backdrop-filter: blur(6px);
   }
 
-  .sheet__layout {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    max-height: inherit;
-  }
-
-  .sheet__media {
-    height: auto;
-    min-height: 100%;
-    padding: 0;
-  }
-
   .sheet__body {
-    overflow-y: auto;
+    max-height: min(70%, 36rem);
+  }
+
+  .sheet__media img {
+    object-position: center 28%;
   }
 }
 
