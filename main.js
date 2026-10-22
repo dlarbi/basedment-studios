@@ -1,107 +1,126 @@
 (() => {
+  const PRINT_5X8 = 48;
+  const PRINT_8X10 = 72;
+
   const catalog = [
     {
       id: "window",
       file: "piece-window.jpg",
       title: "Window light",
-      subtitle: "Oil pastel",
-      price: 180,
+      medium: "Oil pastel",
+      size: "5×8",
+      original: 240,
+      framed: 320,
       blurb: "Looking out — black, yellow, and window blue.",
     },
     {
       id: "pink-blue-acrylic",
       file: "piece-pink-blue-acrylic.jpg",
       title: "Pink and blue light",
-      subtitle: "Acrylic",
-      price: 260,
+      medium: "Acrylic",
+      size: "8×10",
+      original: 340,
+      framed: 430,
       blurb: "Profile in magenta and ice blue. One of one.",
     },
     {
       id: "coloree",
       file: "piece-coloree.jpg",
       title: "Colorée",
-      subtitle: "Acrylic",
-      price: 240,
+      medium: "Acrylic",
+      size: "16×24",
+      original: 520,
+      framed: 680,
       blurb: "Fan, blush, and blue lid — a theatrical study in color.",
     },
     {
       id: "skintones",
       file: "piece-skintones.jpg",
       title: "Skintones",
-      subtitle: "Oil pastel",
-      price: 160,
+      medium: "Oil pastel",
+      size: "8×10",
+      original: 280,
+      framed: 370,
       blurb: "A laughing study in light and city night.",
     },
     {
       id: "pink-blue",
       file: "piece-pink-blue.jpg",
       title: "Pastel colors",
-      subtitle: "Oil pastel",
-      price: 180,
+      medium: "Oil pastel",
+      size: "8×10",
+      original: 300,
+      framed: 390,
       blurb: "Yellow, pink, and blue across a closed gaze.",
     },
     {
       id: "magenta",
       file: "piece-magenta.jpg",
       title: "Magenta light",
-      subtitle: "Oil pastel",
-      price: 160,
+      medium: "Oil pastel",
+      size: "5×8",
+      original: 230,
+      framed: 310,
       blurb: "Hot magenta against cool blue shadow.",
-    },
-    {
-      id: "warm",
-      file: "piece-warm.jpg",
-      title: "Warm light",
-      subtitle: "Oil pastel",
-      price: 160,
-      blurb: "Split light in gold and cobalt.",
     },
     {
       id: "headwrap",
       file: "piece-headwrap.jpg",
       title: "Headwrap",
-      subtitle: "Oil pastel · 8×10",
-      price: 220,
-      blurb: "8×10 oil pastel with architectural backdrop.",
+      medium: "Oil pastel",
+      size: "8×10",
+      original: 320,
+      framed: 410,
+      blurb: "Oil pastel with architectural backdrop.",
     },
     {
       id: "outside",
       file: "piece-outside.jpg",
       title: "Outside light",
-      subtitle: "Oil pastel · 8×10",
-      price: 220,
-      blurb: "8×10 oil pastel — outdoor light on skin.",
+      medium: "Oil pastel",
+      size: "8×10",
+      original: 320,
+      framed: 410,
+      blurb: "Outdoor light on skin.",
     },
     {
       id: "blue-yellow",
       file: "piece-blue-yellow.jpg",
       title: "Blue & yellow",
-      subtitle: "Acrylic",
-      price: 200,
+      medium: "Acrylic",
+      size: "5×8",
+      original: 260,
+      framed: 340,
       blurb: "Hard split of cool blue and warm yellow.",
     },
     {
       id: "cosmic",
       file: "piece-cosmic.jpg",
       title: "Cosmic gaze",
-      subtitle: "Oil pastel",
-      price: 200,
+      medium: "Oil pastel",
+      size: "5×8",
+      original: 260,
+      framed: 340,
       blurb: "Profile in fire-orange and deep blue.",
     },
     {
       id: "steps",
       file: "piece-steps.jpg",
       title: "A few steps",
-      subtitle: "Oil pastel",
-      price: 160,
+      medium: "Oil pastel",
+      size: "5×8",
+      original: 220,
+      framed: 300,
       blurb: "Process portrait — a few steps into the face.",
     },
     {
       id: "foreground",
       file: "piece-foreground.jpg",
       title: "Foreground light",
-      subtitle: "Oil pastel",
-      price: 160,
+      medium: "Oil pastel",
+      size: "8×10",
+      original: 280,
+      framed: 370,
       blurb: "Light held in the front plane of the portrait.",
     },
   ];
@@ -111,9 +130,9 @@
   const sheetImg = document.getElementById("sheet-img");
   const sheetTitle = document.getElementById("sheet-title");
   const sheetMeta = document.getElementById("sheet-meta");
-  const sheetPrice = document.getElementById("sheet-price");
   const sheetBlurb = document.getElementById("sheet-blurb");
   const sheetStatus = document.getElementById("sheet-status");
+  const priceList = document.getElementById("price-list");
   const morePanel = document.getElementById("more-panel");
   const payNote = document.getElementById("pay-note");
   const applePayBtn = document.getElementById("apple-pay");
@@ -121,6 +140,7 @@
   const closeBtn = document.getElementById("sheet-close");
 
   let active = null;
+  let selectedOffer = null;
 
   const money = (n) =>
     new Intl.NumberFormat("en-US", {
@@ -129,20 +149,50 @@
       maximumFractionDigits: 0,
     }).format(n);
 
+  function offersFor(item) {
+    return [
+      {
+        id: "original",
+        label: "Original",
+        detail: `${item.size} · unframed`,
+        price: item.original,
+      },
+      {
+        id: "framed",
+        label: "Original, framed",
+        detail: `${item.size} · framed`,
+        price: item.framed,
+      },
+      {
+        id: "print-5x8",
+        label: "Print",
+        detail: "5×8",
+        price: PRINT_5X8,
+      },
+      {
+        id: "print-8x10",
+        label: "Print",
+        detail: "8×10",
+        price: PRINT_8X10,
+      },
+    ];
+  }
+
   function renderGrid() {
     grid.innerHTML = catalog
       .map(
         (item, i) => `
       <li>
-        <button type="button" class="card" data-id="${item.id}" style="transition-delay:${(i % 4) * 60}ms">
+        <button type="button" class="card" data-id="${item.id}" style="transition-delay:${(i % 4) * 50}ms">
           <div class="card__frame">
-            <img src="assets/${item.file}" alt="${item.title} — available for sale" loading="lazy" width="800" height="1000" />
+            <img src="assets/${item.file}" alt="${item.title} — ${item.size} original for sale" loading="lazy" width="800" height="1000" />
           </div>
           <div class="card__meta">
             <div class="card__row">
               <span class="card__title">${item.title}</span>
-              <span class="card__price">${money(item.price)}</span>
+              <span class="card__price">${money(item.original)}</span>
             </div>
+            <span class="card__size">${item.size} · Original</span>
             <span class="card__avail">Available · Buy</span>
           </div>
         </button>
@@ -163,7 +213,7 @@
             io.unobserve(e.target);
           });
         },
-        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+        { threshold: 0.1, rootMargin: "0px 0px -4% 0px" }
       );
       grid.querySelectorAll(".card").forEach((el) => io.observe(el));
     } else {
@@ -171,22 +221,49 @@
     }
   }
 
+  function renderOffers(item) {
+    const offers = offersFor(item);
+    selectedOffer = offers[0];
+    priceList.innerHTML = offers
+      .map(
+        (o, i) => `
+      <label class="offer ${i === 0 ? "is-selected" : ""}">
+        <input type="radio" name="offer" value="${o.id}" ${i === 0 ? "checked" : ""} />
+        <span class="offer__text">
+          <span class="offer__label">${o.label}</span>
+          <span class="offer__detail">${o.detail}</span>
+        </span>
+        <span class="offer__price">${money(o.price)}</span>
+      </label>`
+      )
+      .join("");
+
+    priceList.querySelectorAll('input[name="offer"]').forEach((input) => {
+      input.addEventListener("change", () => {
+        selectedOffer = offers.find((o) => o.id === input.value);
+        priceList.querySelectorAll(".offer").forEach((el) => el.classList.remove("is-selected"));
+        input.closest(".offer").classList.add("is-selected");
+      });
+    });
+  }
+
   function openSheet(id) {
     active = catalog.find((c) => c.id === id);
     if (!active) return;
 
     sheetImg.src = `assets/${active.file}`;
-    sheetImg.alt = `${active.title} — for sale`;
+    sheetImg.alt = `${active.title} — ${active.size}`;
     sheetTitle.textContent = active.title;
-    sheetMeta.textContent = `${active.subtitle} · Original · Ann Arbor`;
-    sheetPrice.textContent = money(active.price);
+    sheetMeta.textContent = `${active.medium} · ${active.size} · Ann Arbor`;
     sheetBlurb.textContent = active.blurb;
     sheetStatus.textContent = "Available";
     morePanel.hidden = true;
     payNote.hidden = true;
     payNote.textContent = "";
     learnMoreBtn.textContent = "Learn more";
+    renderOffers(active);
 
+    document.body.classList.add("sheet-open");
     if (typeof sheet.showModal === "function") sheet.showModal();
     else sheet.setAttribute("open", "");
   }
@@ -194,13 +271,17 @@
   function closeSheet() {
     if (typeof sheet.close === "function") sheet.close();
     else sheet.removeAttribute("open");
+    document.body.classList.remove("sheet-open");
     active = null;
+    selectedOffer = null;
   }
 
   function runApplePayPlaceholder() {
-    if (!active) return;
+    if (!active || !selectedOffer) return;
 
-    // Prefer real Apple Pay when the browser supports it (still placeholder merchant).
+    const label = `${active.title} — ${selectedOffer.label} (${selectedOffer.detail})`;
+    const amount = selectedOffer.price;
+
     const canApplePay =
       window.ApplePaySession &&
       ApplePaySession.canMakePayments &&
@@ -214,15 +295,14 @@
           supportedNetworks: ["visa", "masterCard", "amex", "discover"],
           merchantCapabilities: ["supports3DS"],
           total: {
-            label: `Basedment Studio — ${active.title}`,
-            amount: active.price.toFixed(2),
+            label: `Basedment Studio — ${label}`,
+            amount: amount.toFixed(2),
             type: "final",
           },
         };
         const session = new ApplePaySession(3, request);
 
         session.onvalidatemerchant = () => {
-          // No merchant ID yet — abort gracefully into placeholder note.
           session.abort();
           showPayNote(
             "Apple Pay is ready on this device. Merchant setup is next — DM @basedmentstudio to complete this purchase now."
@@ -241,7 +321,7 @@
     }
 
     showPayNote(
-      `Reserve ${active.title} for ${money(active.price)}. Apple Pay checkout is wired for launch — for now, DM @basedmentstudio to buy.`
+      `Reserve ${label} for ${money(amount)}. Apple Pay checkout is wired for launch — for now, DM @basedmentstudio to buy.`
     );
   }
 
@@ -251,8 +331,9 @@
   }
 
   closeBtn.addEventListener("click", closeSheet);
-  sheet.addEventListener("click", (e) => {
-    if (e.target === sheet) closeSheet();
+  sheet.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    closeSheet();
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && sheet.open) closeSheet();

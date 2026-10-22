@@ -2,22 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Basedment Studio — Works for sale</title>
     <meta
       name="description"
-      content="Basedment Studio, Ann Arbor. Original paintings for sale. Buy with Apple Pay or DM @basedmentstudio."
+      content="Basedment Studio, Ann Arbor. Original paintings and prints for sale. Buy with Apple Pay or DM @basedmentstudio."
     />
     <meta name="theme-color" content="#090908" />
     <link rel="canonical" href="https://dlarbi.github.io/basedment-studios/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Basedment Studio" />
-    <meta property="og:description" content="Original paintings from Ann Arbor. Available now." />
+    <meta property="og:description" content="Originals and prints from Ann Arbor. Available now." />
     <meta property="og:image" content="https://dlarbi.github.io/basedment-studios/assets/og.jpg" />
     <meta property="og:url" content="https://dlarbi.github.io/basedment-studios/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Basedment Studio" />
-    <meta name="twitter:description" content="Original paintings from Ann Arbor. Available now." />
+    <meta name="twitter:description" content="Originals and prints from Ann Arbor. Available now." />
     <meta name="twitter:image" content="https://dlarbi.github.io/basedment-studios/assets/og.jpg" />
     <link rel="icon" href="assets/og.jpg" type="image/jpeg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +35,7 @@
       <a class="nav__brand" href="#top">Basedment</a>
       <nav class="nav__links" aria-label="Primary">
         <a href="#shop">Shop</a>
-        <a href="https://www.instagram.com/basedmentstudio/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.instagram.com/basedmentstudio/" target="_blank" rel="noopener noreferrer">IG</a>
       </nav>
     </header>
 
@@ -53,16 +53,19 @@
         </div>
         <div class="hero__copy">
           <p class="hero__kicker">Ann Arbor</p>
-          <h1>Basedment Studio</h1>
-          <p class="hero__sub">Originals available. Prints on request.</p>
-          <a class="text-link" href="#shop">Shop the works →</a>
+          <h1>
+            <span class="hero__line1">Basedment</span>
+            <span class="hero__line2">Studio</span>
+          </h1>
+          <p class="hero__sub">Originals &amp; prints. Available now.</p>
+          <a class="text-link" href="#shop">Shop the works</a>
         </div>
       </section>
 
       <section id="shop" class="shop">
         <div class="shop__head">
           <h2>For sale</h2>
-          <p>Select a work to buy or learn more.</p>
+          <p>Originals, framed, or prints.</p>
         </div>
         <ul class="grid" id="grid"></ul>
       </section>
@@ -78,33 +81,37 @@
 
     <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
       <div class="sheet__layout">
-        <button type="button" class="sheet__close" id="sheet-close" aria-label="Close">×</button>
+        <button type="button" class="sheet__close" id="sheet-close" aria-label="Close">Close</button>
+
         <figure class="sheet__media">
           <img id="sheet-img" src="" alt="" />
         </figure>
+
         <div class="sheet__body">
           <p class="sheet__status" id="sheet-status">Available</p>
           <h2 id="sheet-title"></h2>
           <p class="sheet__meta" id="sheet-meta"></p>
-          <p class="sheet__price" id="sheet-price"></p>
-          <p class="sheet__blurb" id="sheet-blurb">
-            Original work from Basedment Studio. Ships from Ann Arbor.
-          </p>
+          <p class="sheet__blurb" id="sheet-blurb"></p>
+
+          <div class="sheet__prices" aria-label="Purchase options">
+            <p class="sheet__prices-label">Choose an option</p>
+            <div class="price-list" id="price-list"></div>
+            <p class="sheet__print-note">Prints available in 5×8 or 8×10.</p>
+          </div>
 
           <div class="sheet__actions">
             <button type="button" class="apple-pay" id="apple-pay" aria-label="Buy with Apple Pay">
-              <span class="apple-pay__logo" aria-hidden="true"></span>
               <span>Buy with</span>
-              <span class="apple-pay__word" aria-hidden="true"> Apple&nbsp;Pay</span>
+              <span class="apple-pay__word">Apple&nbsp;Pay</span>
             </button>
             <button type="button" class="ghost-btn" id="learn-more">Learn more</button>
           </div>
 
           <div class="sheet__more" id="more-panel" hidden>
             <p>
-              Oil pastel and acrylic portraits, made daily in Ann Arbor.
-              Each piece is one of one. Questions on size, framing, or prints —
-              message <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">@basedmentstudio</a>.
+              Each original is one of one, made in Ann Arbor.
+              Prints ship in 5×8 or 8×10. Questions —
+              <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">DM @basedmentstudio</a>.
             </p>
           </div>
 
