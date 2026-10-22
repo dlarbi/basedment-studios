@@ -1,12 +1,12 @@
 (() => {
   const catalog = [
     {
-      id: "pink-blue",
-      file: "piece-pink-blue.jpg",
-      title: "Pastel colors",
+      id: "window",
+      file: "piece-window.jpg",
+      title: "Window light",
       subtitle: "Oil pastel",
       price: 180,
-      blurb: "Yellow, pink, and blue light across a closed gaze. One of one.",
+      blurb: "Looking out — black, yellow, and window blue.",
     },
     {
       id: "coloree",
@@ -17,12 +17,28 @@
       blurb: "Fan, blush, and blue lid — a theatrical study in color.",
     },
     {
+      id: "skintones",
+      file: "piece-skintones.jpg",
+      title: "Skintones",
+      subtitle: "Oil pastel",
+      price: 160,
+      blurb: "A laughing study in light and city night.",
+    },
+    {
+      id: "pink-blue",
+      file: "piece-pink-blue.jpg",
+      title: "Pastel colors",
+      subtitle: "Oil pastel",
+      price: 180,
+      blurb: "Yellow, pink, and blue across a closed gaze.",
+    },
+    {
       id: "magenta",
       file: "piece-magenta.jpg",
       title: "Magenta light",
       subtitle: "Oil pastel",
       price: 160,
-      blurb: "Hot magenta against cool blue shadow. Sketchbook original.",
+      blurb: "Hot magenta against cool blue shadow.",
     },
     {
       id: "warm",
@@ -30,7 +46,7 @@
       title: "Warm light",
       subtitle: "Oil pastel",
       price: 160,
-      blurb: "Split light in gold and cobalt. Quiet, closed eyes.",
+      blurb: "Split light in gold and cobalt.",
     },
     {
       id: "headwrap",
@@ -38,7 +54,7 @@
       title: "Headwrap",
       subtitle: "Oil pastel · 8×10",
       price: 220,
-      blurb: "8×10 oil pastel portrait with architectural backdrop.",
+      blurb: "8×10 oil pastel with architectural backdrop.",
     },
     {
       id: "outside",
@@ -55,14 +71,6 @@
       subtitle: "Acrylic",
       price: 200,
       blurb: "Hard split of cool blue and warm yellow.",
-    },
-    {
-      id: "window",
-      file: "piece-window.jpg",
-      title: "Window light",
-      subtitle: "Oil pastel",
-      price: 180,
-      blurb: "Soft daylight falling through a window.",
     },
     {
       id: "cosmic",
@@ -87,14 +95,6 @@
       subtitle: "Oil pastel",
       price: 160,
       blurb: "Light held in the front plane of the portrait.",
-    },
-    {
-      id: "skintones",
-      file: "piece-skintones.jpg",
-      title: "Skintones",
-      subtitle: "Oil pastel",
-      price: 160,
-      blurb: "A study toward natural skintones and light.",
     },
   ];
 
