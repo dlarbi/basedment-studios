@@ -1,24 +1,17 @@
 # Basedment Studio
 
-Marketing site for [Basedment Studio](https://www.instagram.com/basedmentstudio/) — daily paintings from Ann Arbor, MI.
+Marketing & shop site for [Basedment Studio](https://www.instagram.com/basedmentstudio/) — Ann Arbor originals.
 
-**Live:** [dlarbi.github.io/basedment-studios](https://dlarbi.github.io/basedment-studios/)
+**Live:** https://dlarbi.github.io/basedment-studios/
 
-DM [@basedmentstudio](https://ig.me/m/basedmentstudio) for originals & prints.
+Buy / learn more on each work. Apple Pay button is in place (merchant setup pending); DM [@basedmentstudio](https://ig.me/m/basedmentstudio) to purchase now.
 
-## Local preview
+## Local
 
 ```bash
 python3 -m http.server 8080
-# open http://localhost:8080
 ```
 
-## GitHub Pages
+## Pages
 
-This is a static site at the repo root. After merging to `main`:
-
-1. Repo **Settings → Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` / `/ (root)` → Save
-
-Site publishes at `https://dlarbi.github.io/basedment-studios/`.
+Settings → Pages → Deploy from branch → `main` / `/ (root)`.
