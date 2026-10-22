@@ -9,6 +9,14 @@
       blurb: "Looking out — black, yellow, and window blue.",
     },
     {
+      id: "pink-blue-acrylic",
+      file: "piece-pink-blue-acrylic.jpg",
+      title: "Pink and blue light",
+      subtitle: "Acrylic",
+      price: 260,
+      blurb: "Profile in magenta and ice blue. One of one.",
+    },
+    {
       id: "coloree",
       file: "piece-coloree.jpg",
       title: "Colorée",
