@@ -1,0 +1,134 @@
+[
+  {
+    "id": "pink-blue",
+    "file": "piece-pink-blue.jpg",
+    "title": "Pastel colors",
+    "subtitle": "Oil pastel",
+    "price": 180,
+    "featured": true,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "coloree",
+    "file": "piece-coloree.jpg",
+    "title": "Color\u00e9e",
+    "subtitle": "Acrylic",
+    "price": 240,
+    "featured": true,
+    "medium": "Acrylic",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "magenta",
+    "file": "piece-magenta.jpg",
+    "title": "Magenta light",
+    "subtitle": "Oil pastel",
+    "price": 160,
+    "featured": false,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "warm",
+    "file": "piece-warm.jpg",
+    "title": "Warm light",
+    "subtitle": "Oil pastel",
+    "price": 160,
+    "featured": false,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "headwrap",
+    "file": "piece-headwrap.jpg",
+    "title": "Headwrap",
+    "subtitle": "Oil pastel \u00b7 8\u00d710",
+    "price": 220,
+    "featured": false,
+    "medium": "Oil pastel \u00b7 8\u00d710",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "outside",
+    "file": "piece-outside.jpg",
+    "title": "Outside light",
+    "subtitle": "Oil pastel \u00b7 8\u00d710",
+    "price": 220,
+    "featured": false,
+    "medium": "Oil pastel \u00b7 8\u00d710",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "blue-yellow",
+    "file": "piece-blue-yellow.jpg",
+    "title": "Blue & yellow",
+    "subtitle": "Acrylic",
+    "price": 200,
+    "featured": false,
+    "medium": "Acrylic",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "window",
+    "file": "piece-window.jpg",
+    "title": "Window light",
+    "subtitle": "Oil pastel",
+    "price": 180,
+    "featured": false,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "cosmic",
+    "file": "piece-cosmic.jpg",
+    "title": "Cosmic gaze",
+    "subtitle": "Oil pastel",
+    "price": 200,
+    "featured": false,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "steps",
+    "file": "piece-steps.jpg",
+    "title": "A few steps",
+    "subtitle": "Oil pastel",
+    "price": 160,
+    "featured": false,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "foreground",
+    "file": "piece-foreground.jpg",
+    "title": "Foreground light",
+    "subtitle": "Oil pastel",
+    "price": 160,
+    "featured": false,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  },
+  {
+    "id": "skintones",
+    "file": "piece-skintones.jpg",
+    "title": "Skintones",
+    "subtitle": "Oil pastel",
+    "price": 160,
+    "featured": false,
+    "medium": "Oil pastel",
+    "size": "Original",
+    "availability": "Available"
+  }
+]
