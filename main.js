@@ -1,5 +1,5 @@
 (() => {
-  // Baseline: 5×8 framed = $150. Everything scales from that.
+  // Baseline: 5×8 framed = $180. Everything scales from that.
   const PRINT_5X8 = 40;
   const PRINT_8X10 = 65;
 
