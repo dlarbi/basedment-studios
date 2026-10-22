@@ -75,22 +75,6 @@
       blurb: "Outdoor light on skin.",
     },
     {
-      id: "beard-cap",
-      file: "piece-beard-cap.jpg",
-      title: "Cap & beard",
-      medium: "Oil pastel",
-      size: "5×8",
-      blurb: "Blue eyes, white cap, sky behind.",
-    },
-    {
-      id: "orbs",
-      file: "piece-orbs.jpg",
-      title: "Orbs",
-      medium: "Oil pastel",
-      size: "5×8",
-      blurb: "Warm face, floating color orbs on black.",
-    },
-    {
       id: "silver-beard",
       file: "piece-silver-beard.jpg",
       title: "Silver",
@@ -113,14 +97,6 @@
       medium: "Oil pastel",
       size: "5×8",
       blurb: "Profile in fire-orange and deep blue.",
-    },
-    {
-      id: "steps",
-      file: "piece-steps.jpg",
-      title: "A few steps",
-      medium: "Oil pastel",
-      size: "5×8",
-      blurb: "Process portrait — a few steps into the face.",
     },
     {
       id: "foreground",
