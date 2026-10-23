@@ -178,26 +178,24 @@
   function renderGrid() {
     grid.innerHTML = catalog
       .map(
-        (item) => `
-      <article class="card" data-id="${item.id}">
-        <button type="button" class="card__hit" data-id="${item.id}" aria-label="View ${item.title}">
-          <div class="card__frame">
-            <img src="assets/${item.file}" alt="${item.title} — ${item.size} original for sale" loading="lazy" width="800" height="1000" />
+        (item, i) => `
+      <button type="button" class="card" data-id="${item.id}" style="transition-delay:${(i % 4) * 50}ms">
+        <div class="card__frame">
+          <img src="assets/${item.file}" alt="${item.title} — ${item.size} original for sale" loading="lazy" width="800" height="1000" />
+        </div>
+        <div class="card__meta">
+          <div class="card__row">
+            <span class="card__title">${item.title}</span>
+            <span class="card__price">${money(item.framed)}</span>
           </div>
-          <div class="card__meta">
-            <div class="card__row">
-              <h3 class="card__title">${item.title}</h3>
-              <span class="card__price">${money(item.framed)}</span>
-            </div>
-            <span class="card__size">${item.size} · from ${money(item.original)}</span>
-            <span class="card__cta">Available · Buy</span>
-          </div>
-        </button>
-      </article>`
+          <span class="card__size">${item.size} · from ${money(item.original)}</span>
+          <span class="card__avail">Available · Buy</span>
+        </div>
+      </button>`
       )
       .join("");
 
-    grid.querySelectorAll(".card__hit").forEach((btn) => {
+    grid.querySelectorAll(".card").forEach((btn) => {
       btn.addEventListener("click", () => openSheet(btn.dataset.id));
     });
 
@@ -248,7 +246,10 @@
     sheet.classList.toggle("sheet--studio", Boolean(active.studio));
     sheetTitle.textContent = active.title;
     sheetMeta.textContent = `${active.medium} · ${active.size} · Ann Arbor`;
-    sheetBlurb.textContent = active.blurb;
+    if (sheetBlurb) {
+      sheetBlurb.textContent = "";
+      sheetBlurb.hidden = true;
+    }
     sheetStatus.textContent = "Available";
     fillOffers(active);
     morePanel.hidden = true;
