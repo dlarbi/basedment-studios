@@ -478,9 +478,8 @@ a {
   right: 0;
   bottom: 0;
   z-index: 3;
-  max-height: min(42dvh, 22rem);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  display: flex;
+  justify-content: center;
   padding:
     0
     max(0.75rem, env(safe-area-inset-right, 0px))
@@ -492,6 +491,14 @@ a {
 
 .sheet__panel {
   pointer-events: auto;
+  width: 100%;
+  max-width: 28rem;
+  max-height: min(42dvh, 22rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
   padding: 0.75rem 0.85rem 0.8rem;
   border: 1px solid rgba(244, 240, 234, 0.14);
   background: rgba(12, 11, 10, 0.38);
@@ -732,14 +739,9 @@ a {
       2.25rem;
   }
 
-  .sheet__body {
-    max-height: min(40%, 22rem);
-    display: flex;
-    justify-content: center;
-  }
-
   .sheet__panel {
     width: min(100%, 26rem);
+    max-height: min(40dvh, 22rem);
   }
 }
 
