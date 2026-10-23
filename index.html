@@ -26,7 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Sora:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=sheet-overlay" />
+    <link rel="stylesheet" href="styles.css?v=studio-sheet" />
   </head>
   <body>
     <a class="skip" href="#shop">Skip to shop</a>
@@ -81,6 +81,8 @@
 
     <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
       <div class="sheet__layout">
+        <div class="sheet__atmosphere" aria-hidden="true"></div>
+
         <button type="button" class="sheet__close" id="sheet-close" aria-label="Close">Close</button>
 
         <figure class="sheet__media">
@@ -88,38 +90,40 @@
         </figure>
 
         <div class="sheet__body">
-          <p class="sheet__status" id="sheet-status">Available</p>
-          <h2 id="sheet-title"></h2>
-          <p class="sheet__meta" id="sheet-meta"></p>
-          <p class="sheet__blurb" id="sheet-blurb"></p>
+          <div class="sheet__panel">
+            <p class="sheet__status" id="sheet-status">Available</p>
+            <h2 id="sheet-title"></h2>
+            <p class="sheet__meta" id="sheet-meta"></p>
+            <p class="sheet__blurb" id="sheet-blurb"></p>
 
-          <div class="sheet__prices" aria-label="Purchase options">
-            <p class="sheet__prices-label">Choose an option</p>
-            <div class="price-list" id="price-list"></div>
-            <p class="sheet__print-note">Prints available in 5×8 or 8×10.</p>
+            <div class="sheet__prices" aria-label="Purchase options">
+              <p class="sheet__prices-label">Choose an option</p>
+              <div class="price-list" id="price-list"></div>
+              <p class="sheet__print-note">Prints available in 5×8 or 8×10.</p>
+            </div>
+
+            <div class="sheet__actions">
+              <button type="button" class="apple-pay" id="apple-pay" aria-label="Buy with Apple Pay">
+                <span>Buy with</span>
+                <span class="apple-pay__word">Apple&nbsp;Pay</span>
+              </button>
+              <button type="button" class="ghost-btn" id="learn-more">Learn more</button>
+            </div>
+
+            <div class="sheet__more" id="more-panel" hidden>
+              <p>
+                Each original is one of one, made in Ann Arbor.
+                Prints ship in 5×8 or 8×10. Questions —
+                <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">DM @basedmentstudio</a>.
+              </p>
+            </div>
+
+            <p class="sheet__note" id="pay-note" hidden></p>
           </div>
-
-          <div class="sheet__actions">
-            <button type="button" class="apple-pay" id="apple-pay" aria-label="Buy with Apple Pay">
-              <span>Buy with</span>
-              <span class="apple-pay__word">Apple&nbsp;Pay</span>
-            </button>
-            <button type="button" class="ghost-btn" id="learn-more">Learn more</button>
-          </div>
-
-          <div class="sheet__more" id="more-panel" hidden>
-            <p>
-              Each original is one of one, made in Ann Arbor.
-              Prints ship in 5×8 or 8×10. Questions —
-              <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">DM @basedmentstudio</a>.
-            </p>
-          </div>
-
-          <p class="sheet__note" id="pay-note" hidden></p>
         </div>
       </div>
     </dialog>
 
-    <script src="main.js?v=dedupe" defer></script>
+    <script src="main.js?v=studio" defer></script>
   </body>
 </html>

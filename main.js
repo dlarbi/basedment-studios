@@ -9,10 +9,12 @@
     "16×24": { original: 480, framed: 620 },
   };
 
+  // `file` = shop grid crop. `studio` = full uncropped desk photo for the sheet.
   const catalog = [
     {
       id: "window",
       file: "piece-window.jpg",
+      studio: "studio-window.jpg",
       title: "Window light",
       medium: "Oil pastel",
       size: "5×8",
@@ -21,6 +23,7 @@
     {
       id: "pink-blue-acrylic",
       file: "piece-pink-blue-acrylic.jpg",
+      studio: "studio-pink-blue-acrylic.jpg",
       title: "Pink and blue light",
       medium: "Acrylic",
       size: "8×10",
@@ -37,6 +40,7 @@
     {
       id: "skintones",
       file: "piece-skintones.jpg",
+      studio: "studio-skintones.jpg",
       title: "Skintones",
       medium: "Oil pastel",
       size: "8×10",
@@ -45,6 +49,7 @@
     {
       id: "pink-blue",
       file: "piece-pink-blue.jpg",
+      studio: "studio-pink-blue.jpg",
       title: "Pastel colors",
       medium: "Oil pastel",
       size: "8×10",
@@ -53,6 +58,7 @@
     {
       id: "magenta",
       file: "piece-magenta.jpg",
+      studio: "studio-magenta.jpg",
       title: "Magenta light",
       medium: "Oil pastel",
       size: "5×8",
@@ -61,6 +67,7 @@
     {
       id: "headwrap",
       file: "piece-headwrap.jpg",
+      studio: "studio-headwrap.jpg",
       title: "Headwrap",
       medium: "Oil pastel",
       size: "8×10",
@@ -69,6 +76,7 @@
     {
       id: "outside",
       file: "piece-outside.jpg",
+      studio: "studio-outside.jpg",
       title: "Outside light",
       medium: "Oil pastel",
       size: "8×10",
@@ -93,6 +101,7 @@
     {
       id: "cosmic",
       file: "piece-cosmic.jpg",
+      studio: "studio-cosmic.jpg",
       title: "Cosmic gaze",
       medium: "Oil pastel",
       size: "5×8",
@@ -101,6 +110,7 @@
     {
       id: "foreground",
       file: "piece-foreground.jpg",
+      studio: "studio-foreground.jpg",
       title: "Foreground light",
       medium: "Oil pastel",
       size: "8×10",
@@ -168,47 +178,41 @@
   function renderGrid() {
     grid.innerHTML = catalog
       .map(
-        (item, i) => `
-      <li>
-        <button type="button" class="card" data-id="${item.id}" style="transition-delay:${(i % 4) * 50}ms">
+        (item) => `
+      <article class="card" data-id="${item.id}">
+        <button type="button" class="card__hit" data-id="${item.id}" aria-label="View ${item.title}">
           <div class="card__frame">
             <img src="assets/${item.file}" alt="${item.title} — ${item.size} original for sale" loading="lazy" width="800" height="1000" />
           </div>
           <div class="card__meta">
             <div class="card__row">
-              <span class="card__title">${item.title}</span>
+              <h3 class="card__title">${item.title}</h3>
               <span class="card__price">${money(item.framed)}</span>
             </div>
             <span class="card__size">${item.size} · from ${money(item.original)}</span>
-            <span class="card__avail">Available · Buy</span>
+            <span class="card__cta">Available · Buy</span>
           </div>
         </button>
-      </li>`
+      </article>`
       )
       .join("");
 
-    grid.querySelectorAll(".card").forEach((btn) => {
+    grid.querySelectorAll(".card__hit").forEach((btn) => {
       btn.addEventListener("click", () => openSheet(btn.dataset.id));
     });
 
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          });
-        },
-        { threshold: 0.1, rootMargin: "0px 0px -4% 0px" }
-      );
-      grid.querySelectorAll(".card").forEach((el) => io.observe(el));
-    } else {
-      grid.querySelectorAll(".card").forEach((el) => el.classList.add("is-in"));
-    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("is-in");
+        });
+      },
+      { threshold: 0.12 }
+    );
+    grid.querySelectorAll(".card").forEach((c) => io.observe(c));
   }
 
-  function renderOffers(item) {
+  function fillOffers(item) {
     const offers = offersFor(item);
     selectedOffer = offers[1]; // default framed
     priceList.innerHTML = offers
@@ -238,17 +242,18 @@
     active = catalog.find((c) => c.id === id);
     if (!active) return;
 
-    sheetImg.src = `assets/${active.file}`;
-    sheetImg.alt = `${active.title} — ${active.size}`;
+    const src = active.studio || active.file;
+    sheetImg.src = `assets/${src}`;
+    sheetImg.alt = `${active.title} — studio view`;
+    sheet.classList.toggle("sheet--studio", Boolean(active.studio));
     sheetTitle.textContent = active.title;
     sheetMeta.textContent = `${active.medium} · ${active.size} · Ann Arbor`;
     sheetBlurb.textContent = active.blurb;
     sheetStatus.textContent = "Available";
+    fillOffers(active);
     morePanel.hidden = true;
-    payNote.hidden = true;
-    payNote.textContent = "";
     learnMoreBtn.textContent = "Learn more";
-    renderOffers(active);
+    payNote.hidden = true;
 
     document.body.classList.add("sheet-open");
     if (typeof sheet.showModal === "function") sheet.showModal();
@@ -259,47 +264,29 @@
     if (typeof sheet.close === "function") sheet.close();
     else sheet.removeAttribute("open");
     document.body.classList.remove("sheet-open");
-    active = null;
-    selectedOffer = null;
   }
 
-  function runApplePayPlaceholder() {
+  applePayBtn.addEventListener("click", () => {
     if (!active || !selectedOffer) return;
-
     const label = `${active.title} — ${selectedOffer.label} (${selectedOffer.detail})`;
     const amount = selectedOffer.price;
 
-    const canApplePay =
-      window.ApplePaySession &&
-      ApplePaySession.canMakePayments &&
-      ApplePaySession.canMakePayments();
-
-    if (canApplePay) {
+    if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
       try {
         const request = {
           countryCode: "US",
           currencyCode: "USD",
           supportedNetworks: ["visa", "masterCard", "amex", "discover"],
           merchantCapabilities: ["supports3DS"],
-          total: {
-            label: `Basedment Studio — ${label}`,
-            amount: amount.toFixed(2),
-            type: "final",
-          },
+          total: { label: "Basedment Studio", amount: String(amount) },
         };
         const session = new ApplePaySession(3, request);
-
         session.onvalidatemerchant = () => {
+          payNote.hidden = false;
+          payNote.innerHTML = `Apple Pay is almost ready — for now, DM to buy <strong>${label}</strong> for ${money(amount)}. <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">Message @basedmentstudio</a>`;
           session.abort();
-          showPayNote(
-            "Apple Pay is ready on this device. Merchant setup is next — DM @basedmentstudio to complete this purchase now."
-          );
         };
-
-        session.oncancel = () => {
-          showPayNote("Checkout canceled.");
-        };
-
+        session.oncancel = () => {};
         session.begin();
         return;
       } catch (_) {
@@ -307,15 +294,15 @@
       }
     }
 
-    showPayNote(
-      `Reserve ${label} for ${money(amount)}. Apple Pay checkout is wired for launch — for now, DM @basedmentstudio to buy.`
-    );
-  }
-
-  function showPayNote(text) {
     payNote.hidden = false;
-    payNote.innerHTML = `${text} <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">Open Instagram DM</a>`;
-  }
+    payNote.innerHTML = `To buy <strong>${label}</strong> for ${money(amount)}, DM <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">@basedmentstudio</a>.`;
+  });
+
+  learnMoreBtn.addEventListener("click", () => {
+    const open = morePanel.hidden;
+    morePanel.hidden = !open;
+    learnMoreBtn.textContent = open ? "Hide details" : "Learn more";
+  });
 
   closeBtn.addEventListener("click", closeSheet);
   sheet.addEventListener("cancel", (e) => {
@@ -324,13 +311,6 @@
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && sheet.open) closeSheet();
-  });
-
-  applePayBtn.addEventListener("click", runApplePayPlaceholder);
-  learnMoreBtn.addEventListener("click", () => {
-    const open = morePanel.hidden;
-    morePanel.hidden = !open;
-    learnMoreBtn.textContent = open ? "Hide details" : "Learn more";
   });
 
   renderGrid();
