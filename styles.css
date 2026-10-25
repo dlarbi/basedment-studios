@@ -259,6 +259,13 @@ a {
   gap: 1.35rem 0.7rem;
 }
 
+.grid > li {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: flex;
+}
+
 .card {
   margin: 0;
   padding: 0;
@@ -341,6 +348,230 @@ a {
   color: var(--rose-soft);
 }
 
+/* Story / local SEO sections */
+.story,
+.region,
+.faq {
+  border-top: 1px solid var(--line);
+  padding: 3.25rem 0;
+}
+
+.story__inner,
+.region__inner,
+.faq__inner {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: 0 var(--pad-r) 0 var(--pad);
+}
+
+.story__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rose-soft);
+}
+
+.story h2,
+.region h2,
+.faq h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.55rem, 4.5vw, 2.15rem);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.story__lead {
+  margin: 1rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--bone);
+}
+
+.story p,
+.region p {
+  margin: 1rem 0 0;
+  color: var(--fog);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.story strong,
+.region strong,
+.faq strong {
+  color: var(--bone);
+  font-weight: 500;
+}
+
+.region__list {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.35rem;
+}
+
+.region__list li {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--line);
+}
+
+.region__list strong {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  letter-spacing: -0.02em;
+}
+
+.region__list span {
+  color: var(--fog);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.region__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.84rem;
+}
+
+.region__links a,
+.page-related a,
+.foot__nav a {
+  color: var(--rose-soft);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196, 91, 138, 0.35);
+}
+
+.faq__list {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0;
+}
+
+.faq details {
+  border-top: 1px solid var(--line);
+  padding: 0.95rem 0;
+}
+
+.faq details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: -0.02em;
+  list-style: none;
+  color: var(--bone);
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq details p {
+  margin: 0.7rem 0 0.15rem;
+  color: var(--fog);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.faq details a {
+  color: var(--rose-soft);
+}
+
+/* Interior SEO pages */
+.page .nav {
+  mix-blend-mode: normal;
+  background: linear-gradient(180deg, rgba(9, 9, 8, 0.92), rgba(9, 9, 8, 0));
+}
+
+.page-main {
+  padding: calc(5.5rem + env(safe-area-inset-top, 0px)) 0 0;
+}
+
+.page-hero {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: 0 var(--pad-r) 2.5rem var(--pad);
+}
+
+.page-hero h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.page-hero__sub {
+  margin: 1rem 0 0;
+  max-width: 36ch;
+  color: var(--fog);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.page-hero__cta {
+  opacity: 1;
+  animation: none;
+}
+
+.page-prose {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: 0 var(--pad-r) 3.5rem var(--pad);
+  border-top: 1px solid var(--line);
+}
+
+.page-prose h2 {
+  margin: 2.25rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+}
+
+.page-prose p,
+.page-prose li {
+  color: var(--fog);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.page-prose p {
+  margin: 0.85rem 0 0;
+}
+
+.page-prose ul {
+  margin: 0.9rem 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.page-prose a {
+  color: var(--rose-soft);
+}
+
+.page-related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.2rem;
+}
+
 /* Footer */
 .foot {
   width: min(100%, var(--max));
@@ -369,6 +600,12 @@ a {
 .foot a {
   text-decoration: none;
   border-bottom: 1px solid rgba(196, 91, 138, 0.45);
+}
+
+.foot__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
 }
 
 /* Studio sheet — uncropped photo centered; buy UI as floating foreground */
@@ -702,6 +939,12 @@ a {
 @media (min-width: 760px) {
   .shop {
     padding: 4rem 0 5rem;
+  }
+
+  .story,
+  .region,
+  .faq {
+    padding: 4.25rem 0;
   }
 
   .shop__head h2 {

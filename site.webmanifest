@@ -1,0 +1,20 @@
+{
+  "name": "Basedment Studio — Original Art Ann Arbor",
+  "short_name": "Basedment",
+  "description": "Original oil pastel and acrylic portraits for sale from Ann Arbor, Michigan. Ships across the Midwest.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090908",
+  "theme_color": "#090908",
+  "lang": "en-US",
+  "categories": ["shopping", "art", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/og.jpg",
+      "sizes": "1200x1200",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
