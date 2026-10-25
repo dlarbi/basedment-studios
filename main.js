@@ -19,6 +19,7 @@
       medium: "Oil pastel",
       size: "5×8",
       blurb: "Looking out — black, yellow, and window blue.",
+      alt: "Window light — original oil pastel portrait for sale by Basedment Studio in Ann Arbor",
     },
     {
       id: "pink-blue-acrylic",
@@ -28,6 +29,7 @@
       medium: "Acrylic",
       size: "8×10",
       blurb: "Profile in magenta and ice blue. One of one.",
+      alt: "Pink and blue light — original acrylic portrait painting for sale in Ann Arbor, Michigan",
     },
     {
       id: "coloree",
@@ -36,6 +38,7 @@
       medium: "Acrylic",
       size: "16×24",
       blurb: "Fan, blush, and blue lid — a theatrical study in color.",
+      alt: "Colorée — large original acrylic figurative painting for sale from Basedment Studio",
     },
     {
       id: "skintones",
@@ -45,6 +48,7 @@
       medium: "Oil pastel",
       size: "8×10",
       blurb: "A laughing study in light and city night.",
+      alt: "Skintones — original oil pastel portrait art for sale in Michigan",
     },
     {
       id: "pink-blue",
@@ -54,6 +58,7 @@
       medium: "Oil pastel",
       size: "8×10",
       blurb: "Yellow, pink, and blue across a closed gaze.",
+      alt: "Pastel colors — colorful oil pastel portrait for sale from Ann Arbor artist",
     },
     {
       id: "magenta",
@@ -63,6 +68,7 @@
       medium: "Oil pastel",
       size: "5×8",
       blurb: "Hot magenta against cool blue shadow.",
+      alt: "Magenta light — small original oil pastel portrait for sale",
     },
     {
       id: "headwrap",
@@ -72,6 +78,7 @@
       medium: "Oil pastel",
       size: "8×10",
       blurb: "Oil pastel with architectural backdrop.",
+      alt: "Headwrap — contemporary oil pastel figurative portrait for sale in Ann Arbor",
     },
     {
       id: "outside",
@@ -81,6 +88,7 @@
       medium: "Oil pastel",
       size: "8×10",
       blurb: "Outdoor light on skin.",
+      alt: "Outside light — original oil pastel portrait painting shipping across the Midwest",
     },
     {
       id: "silver-beard",
@@ -89,6 +97,7 @@
       medium: "Oil pastel",
       size: "5×8",
       blurb: "Profile emerging from black — silver light.",
+      alt: "Silver — original oil pastel profile portrait for sale by Basedment Studio",
     },
     {
       id: "blue-yellow",
@@ -97,6 +106,7 @@
       medium: "Acrylic",
       size: "5×8",
       blurb: "Hard split of cool blue and warm yellow.",
+      alt: "Blue and yellow — original acrylic portrait for sale in Ann Arbor, Michigan",
     },
     {
       id: "cosmic",
@@ -106,6 +116,7 @@
       medium: "Oil pastel",
       size: "5×8",
       blurb: "Profile in fire-orange and deep blue.",
+      alt: "Cosmic gaze — bold oil pastel portrait for sale from Michigan artist",
     },
     {
       id: "foreground",
@@ -115,6 +126,7 @@
       medium: "Oil pastel",
       size: "8×10",
       blurb: "Light held in the front plane of the portrait.",
+      alt: "Foreground light — original oil pastel figurative art for sale",
     },
   ].map((item) => ({
     ...item,
@@ -175,23 +187,117 @@
     ];
   }
 
+  function injectProductSchema() {
+    const existing = document.getElementById("product-jsonld");
+    if (existing) existing.remove();
+
+    const itemList = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": "https://dlarbi.github.io/basedment-studios/#collection",
+      name: "Basedment Studio — original art for sale",
+      description:
+        "Original oil pastel and acrylic portraits for sale from Ann Arbor, Michigan.",
+      numberOfItems: catalog.length,
+      itemListElement: catalog.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": ["Product", "VisualArtwork"],
+          "@id": `https://dlarbi.github.io/basedment-studios/#work-${item.id}`,
+          name: `${item.title} — ${item.medium} portrait`,
+          description: `${item.blurb} Original ${item.medium.toLowerCase()} ${item.size} figurative portrait by Basedment Studio in Ann Arbor, Michigan. Available as original, framed, or print.`,
+          image: `https://dlarbi.github.io/basedment-studios/assets/${item.file}`,
+          sku: item.id,
+          brand: {
+            "@type": "Brand",
+            name: "Basedment Studio",
+          },
+          artMedium: item.medium,
+          artworkSurface: "Paper",
+          width: {
+            "@type": "Distance",
+            name: item.size.split("×")[0] + " in",
+          },
+          height: {
+            "@type": "Distance",
+            name: item.size.split("×")[1] + " in",
+          },
+          creator: {
+            "@id": "https://dlarbi.github.io/basedment-studios/#artist",
+          },
+          offers: [
+            {
+              "@type": "Offer",
+              name: "Original unframed",
+              price: item.original,
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+              url: "https://dlarbi.github.io/basedment-studios/#shop",
+              itemCondition: "https://schema.org/NewCondition",
+              seller: {
+                "@id": "https://dlarbi.github.io/basedment-studios/#organization",
+              },
+            },
+            {
+              "@type": "Offer",
+              name: "Original framed",
+              price: item.framed,
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+              url: "https://dlarbi.github.io/basedment-studios/#shop",
+              itemCondition: "https://schema.org/NewCondition",
+              seller: {
+                "@id": "https://dlarbi.github.io/basedment-studios/#organization",
+              },
+            },
+            {
+              "@type": "Offer",
+              name: "Print 5×8",
+              price: PRINT_5X8,
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+              url: "https://dlarbi.github.io/basedment-studios/#shop",
+            },
+            {
+              "@type": "Offer",
+              name: "Print 8×10",
+              price: PRINT_8X10,
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+              url: "https://dlarbi.github.io/basedment-studios/#shop",
+            },
+          ],
+        },
+      })),
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "product-jsonld";
+    script.textContent = JSON.stringify(itemList);
+    document.head.appendChild(script);
+  }
+
   function renderGrid() {
     grid.innerHTML = catalog
       .map(
         (item, i) => `
+      <li>
       <button type="button" class="card" data-id="${item.id}" style="transition-delay:${(i % 4) * 50}ms">
         <div class="card__frame">
-          <img src="assets/${item.file}" alt="${item.title} — ${item.size} original for sale" loading="lazy" width="800" height="1000" />
+          <img src="assets/${item.file}" alt="${item.alt || `${item.title} — ${item.size} original ${item.medium.toLowerCase()} for sale in Ann Arbor`}" loading="lazy" width="800" height="1000" />
         </div>
         <div class="card__meta">
           <div class="card__row">
             <span class="card__title">${item.title}</span>
             <span class="card__price">${money(item.framed)}</span>
           </div>
-          <span class="card__size">${item.size} · from ${money(item.original)}</span>
+          <span class="card__size">${item.medium} · ${item.size} · from ${money(item.original)}</span>
           <span class="card__avail">Available · Buy</span>
         </div>
-      </button>`
+      </button>
+      </li>`
       )
       .join("");
 
@@ -208,6 +314,7 @@
       { threshold: 0.12 }
     );
     grid.querySelectorAll(".card").forEach((c) => io.observe(c));
+    injectProductSchema();
   }
 
   function fillOffers(item) {
@@ -242,19 +349,27 @@
 
     const src = active.studio || active.file;
     sheetImg.src = `assets/${src}`;
-    sheetImg.alt = `${active.title} — studio view`;
+    sheetImg.alt =
+      active.alt ||
+      `${active.title} — ${active.medium} ${active.size} original portrait for sale in Ann Arbor`;
     sheet.classList.toggle("sheet--studio", Boolean(active.studio));
     sheetTitle.textContent = active.title;
-    sheetMeta.textContent = `${active.medium} · ${active.size} · Ann Arbor`;
+    sheetMeta.textContent = `${active.medium} · ${active.size} · Ann Arbor, MI`;
     if (sheetBlurb) {
-      sheetBlurb.textContent = "";
-      sheetBlurb.hidden = true;
+      sheetBlurb.textContent = active.blurb || "";
+      sheetBlurb.hidden = !active.blurb;
     }
     sheetStatus.textContent = "Available";
     fillOffers(active);
     morePanel.hidden = true;
     learnMoreBtn.textContent = "Learn more";
     payNote.hidden = true;
+
+    const moreCopy = document.getElementById("more-copy");
+    if (moreCopy) {
+      moreCopy.innerHTML = `${active.blurb || "One of one."} Original ${active.medium.toLowerCase()} (${active.size}) made in Ann Arbor — available unframed, framed, or as a print. Ships across Michigan and the Midwest. Questions —
+        <a href="https://ig.me/m/basedmentstudio" target="_blank" rel="noopener noreferrer">DM @basedmentstudio</a>.`;
+    }
 
     document.body.classList.add("sheet-open");
     if (typeof sheet.showModal === "function") sheet.showModal();
