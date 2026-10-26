@@ -32,6 +32,15 @@
       alt: "Pink and blue light — original acrylic portrait painting for sale in Ann Arbor, Michigan",
     },
     {
+      id: "yellow-glasses",
+      file: "piece-yellow-glasses.jpg",
+      title: "Yellow glasses",
+      medium: "Oil pastel",
+      size: "8×10",
+      blurb: "Round yellow lenses and a short white cut.",
+      alt: "Yellow glasses — original oil pastel portrait with yellow lenses for sale in Ann Arbor",
+    },
+    {
       id: "coloree",
       file: "piece-coloree.jpg",
       title: "Colorée",
